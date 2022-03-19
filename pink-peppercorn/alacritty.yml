@@ -1,0 +1,53 @@
+# Colors (Challenger Deep)
+colors:
+  # Default colors
+  primary:
+    background: '0x202729'
+    foreground: '0xcbe1e7'
+    
+  # Normal colors
+  normal:
+    black:   '0x141228'
+    red:     '0xff3279'
+    green:   '0x62d196'
+    yellow:  '0xffb378'
+    blue:    '0x3f8293'
+    magenta: '0x906cff'
+    cyan:    '0x63f2f1'
+    white:   '0xa6b3cc'
+  # Bright colors
+  bright:
+    black:   '0x565575'
+    red:     '0xff8080'
+    green:   '0x95ffa4'
+    yellow:  '0xffe9aa'
+    blue:    '0x91ddff'
+    magenta: '0xc991e1'
+    cyan:    '0xaaffe4'
+    white:   '0xcbe3e7'
+    
+font:
+  normal:
+      family: "Fira Mono"
+      style: Regular
+
+  bold:
+      family: "Fira Mono"
+      style: Bold
+
+  italic:
+      family: "Fira Mono"
+      style: Italic
+
+  bold_italic:
+      family: "Fira Mono"
+      style: Bold Italic
+
+  size: 10
+
+window:
+  opacity: 0.85
+  padding:
+        x: 10
+        y: 10
+  dynamic_padding: true

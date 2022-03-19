@@ -1,0 +1,47 @@
+#!/bin/bash
+
+cd $(dirname $0)
+N="fnl"
+AR_MSG="Exitting; please remove all files ending in '.inactive' in the following directories: $HOME/.config/alacritty/, $HOME/.config/polybar/, and $HOME/.config/rofi/ and then try running again"
+
+if [ -f "./reverse" ]; then
+    echo "Exitting; this theme appears to already be active. If that is not the case, then delete '$(pwd)/reverse' and try again."
+    exit
+fi
+echo 'mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; timeout 0.4s xsettingsd -c ./xsettingsd.conf; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & bash ~/.fehbg; rm -- "$0"' > ./reverse
+chmod +x ./reverse 
+
+# BSPWM
+bash ./bspwm_theme.sh
+
+# GTK
+mv $HOME/.gtkrc-2.0 $HOME/.gtkrc-2.0.inactive
+cp ./gtk2 $HOME/.gtkrc-2.0
+
+mv $HOME/.config/gtk-3.0/settings.ini $HOME/.config/gtk-3.0/settings.ini.inactive
+cp ./gtk3-settings.ini $HOME/.config/gtk-3.0/settings.ini
+timeout 0.4s xsettingsd -c ./xsettingsd.conf
+
+
+# Alacritty
+if [ -e $HOME/.config/alacritty/alacritty.yml.inactive ]; then
+	echo "$AR_MSG"
+	exit
+fi
+cp $HOME/.config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml.inactive
+echo -e "\nimport:\n  - ~/.config/alacritty/lib/$N.yml" >> $HOME/.config/alacritty/alacritty.yml 
+
+# Polybar
+killall polybar
+polybar --config="./polybar.ini" > /dev/null 2> /dev/null &
+
+# Rofi
+cp $HOME/.config/rofi/config.rasi $HOME/.config/rofi/config.rasi.inactive
+echo "@theme \"$HOME/.local/share/rofi/themes/$N.rasi\"" >>  $HOME/.config/rofi/config.rasi 
+
+# Wallpaper
+if [ -e $HOME/.fehbg.inactive ]; then
+	echo "$AR_MSG"
+	exit
+fi
+feh --no-fehbg --bg-scale ./bg.png

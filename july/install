@@ -1,0 +1,16 @@
+#!/bin/bash
+
+N="july"
+cd $(dirname $0)
+
+# Alacritty
+! [ -d "$HOME/.config/alacritty/lib" ] && mkdir -p $HOME/.config/alacritty/lib
+cp ./alacritty.yml $HOME/.config/alacritty/lib/$N.yml
+
+# Polybar
+! [ -d "$HOME/.config/polybar/" ] && mkdir $HOME/.config/polybar/
+cp ./polybar.ini $HOME/.config/polybar/$N.ini
+
+# Rofi
+! [ -d "$HOME/.local/share/rofi/themes/" ] && mkdir -p $HOME/.local/share/rofi/themes/
+cp ./theme.rasi $HOME/.local/share/rofi/themes/$N.rasi

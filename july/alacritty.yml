@@ -1,0 +1,56 @@
+colors:
+  primary:
+    background: '0x404040'
+    foreground: '0xd2d2d2'
+
+# The Following Colors (except for red) Are From Konsole's Dark Pastels via 'alacritty-theme' (On GitHub: https://github.com/eendroroy/alacritty-theme)
+  # Normal colors
+  normal:
+    black:   '0x3F3F3F'
+    red:     '0xab4d4d'
+    green:   '0x60B48A'
+    yellow:  '0xDFAF8F'
+    blue:    '0x9AB8D7'
+    magenta: '0xDC8CC3'
+    cyan:    '0x8CD0D3'
+    white:   '0xDCDCCC'
+
+  # Bright colors
+  bright:
+    black:   '0x709080'
+    red:     '0xab4d4d'
+    green:   '0x72D5A3'
+    yellow:  '0xF0DFAF'
+    blue:    '0x94BFF3'
+    magenta: '0xEC93D3'
+    cyan:    '0x93E0E3'
+    white:   '0xFFFFFF'
+
+
+
+font:
+  normal:
+      family: "terminus"
+      style: Bold
+
+  bold:
+      family: "terminus"
+      style: Bold
+
+  italic:
+      family: "terminus"
+      style: Italic
+
+  bold_italic:
+      family: "terminus"
+      style: Bold Italic
+
+  size: 10
+
+window:
+  opacity: 1
+  padding:
+        x: 10
+        y: 10
+  dynamic_padding: true
+            
