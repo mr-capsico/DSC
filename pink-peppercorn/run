@@ -8,7 +8,7 @@ if [ -f "./reverse" ]; then
     echo "Exitting; this theme appears to already be active. If that is not the case, then delete '$(pwd)/reverse' and try again."
     exit
 fi
-echo 'rm $HOME/.zsh_desc; mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; timeout 0.4s xsettingsd -c ./xsettingsd.conf; mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; mv $HOME/.config/picom.conf.inactive $HOME/.config/picom.conf; killall polybar; polybar &> /dev/null & bash ~/.fehbg; rm -- "$0"' > ./reverse
+echo '[[ -f $HOME/.zsh_desc ]] && rm $HOME/.zsh_desc; mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; timeout 0.4s xsettingsd -c $(dirname $0)/xsettingsd.conf &> /dev/null; mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; mv $HOME/.config/picom.conf.inactive $HOME/.config/picom.conf; killall polybar; polybar &> /dev/null & bash ~/.fehbg; rm -- "$0"' > ./reverse
 chmod +x ./reverse 
 
 
@@ -21,7 +21,7 @@ cp ./gtk2 $HOME/.gtkrc-2.0
 
 mv $HOME/.config/gtk-3.0/settings.ini $HOME/.config/gtk-3.0/settings.ini.inactive
 cp ./gtk3-settings.ini $HOME/.config/gtk-3.0/settings.ini
-timeout 0.4s xsettingsd -c ./xsettingsd.conf
+timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null
 
 
 # Alacritty

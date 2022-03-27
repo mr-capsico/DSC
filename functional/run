@@ -2,10 +2,10 @@
 
 cd $(dirname $0)
 N="fnl"
-AR_MSG="Exitting; please remove all files ending in '.inactive' in the following directories: $HOME/.config/alacritty/, $HOME/.config/polybar/, and $HOME/.config/rofi/ and then try running again"
+AR_MSG="Exitting; please remove all files ending in '.inactive' in the following directories: $HOME/.config/alacritty/, and $HOME/.config/rofi/ and then try running again"
 
 if [ -f "./reverse" ]; then
-    echo "Exitting; this theme appears to already be active. If that is not the case, then delete '$(pwd)/reverse' and try again."
+    echo "Exitting; this theme appears to already be active. If that is not the case, then either execute (or delete) '$(pwd)/reverse' and try again."
     exit
 fi
 echo 'mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; timeout 0.4s xsettingsd -c ./xsettingsd.conf; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & bash ~/.fehbg; rm -- "$0"' > ./reverse
@@ -40,8 +40,4 @@ cp $HOME/.config/rofi/config.rasi $HOME/.config/rofi/config.rasi.inactive
 echo "@theme \"$HOME/.local/share/rofi/themes/$N.rasi\"" >>  $HOME/.config/rofi/config.rasi 
 
 # Wallpaper
-if [ -e $HOME/.fehbg.inactive ]; then
-	echo "$AR_MSG"
-	exit
-fi
 feh --no-fehbg --bg-scale ./bg.png
