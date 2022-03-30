@@ -49,4 +49,4 @@ if [ -e $HOME/.fehbg.inactive ]; then
 	echo "$AR_MSG"
 	exit
 fi
-feh --no-fehbg --bg-scale ./maia.png
+feh --no-fehbg --bg-scale ./bg.png

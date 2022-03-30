@@ -1,0 +1,23 @@
+#!/bin/bash
+
+while [ $# -gt 0 ]; do
+  arg=$1
+  case $arg in
+    "run")
+     # do_option_1
+     echo "Running."
+    ;;
+    "reverse")
+     # do_option_2
+     echo "Reversing."
+    ;;
+    shortlist)
+      echo "run" reverse shortlist
+    ;;
+    *)
+     echo Wrong option
+    ;;
+  esac
+  shift
+done
+
