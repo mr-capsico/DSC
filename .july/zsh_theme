@@ -1,0 +1,5 @@
+theme="jreese"
+
+[[ -f "$ZSH_CUSTOM/$theme.zsh-theme" ]] && source "$ZSH_CUSTOM/$theme.zsh-theme"
+[[ -f "$ZSH_CUSTOM/themes/$theme.zsh-theme" ]] && source "$ZSH_CUSTOM/themes/$theme.zsh-theme"
+[[ -f "$ZSH/themes/$theme.zsh-theme" ]] && source "$ZSH/themes/$theme.zsh-theme"

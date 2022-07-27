@@ -8,7 +8,7 @@ bspc config focused_border_color \#2e3d53
 # Misc
 bspc config border_width 2
 bspc config window_gap 14
-bspc config border_radius 10
+# bspc config border_radius 10
 bspc config gapless_monocle true
 bspc config borderless_monocle true
 bspc config single_monocle true

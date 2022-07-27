@@ -1,0 +1,3 @@
+source $ZSH/themes/jreese.zsh-theme
+[[ -f $HOME/.shell_colors ]] && (cat $HOME/.shell_colors)
+sleep 1 && clear

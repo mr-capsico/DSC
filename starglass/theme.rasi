@@ -2,6 +2,10 @@
  * ROFI Color theme (Based on DarkBlue by QBall)
  */
 
+configuration {
+	font: "terminus bold 20";
+}
+
 * {
     selected-normal-foreground:  rgba ( 2, 20, 63, 100 % );
     foreground:                  #d2d2d2;
@@ -16,14 +20,14 @@
     lightbg:                     rgba ( 238, 232, 213, 100 % );
     selected-active-foreground:  rgba ( 2, 20, 63, 100 % );
     alternate-active-background: rgba ( 0, 0, 0, 0 % );
-    background:                  #363636;
-    bordercolor:                 rgba ( 219, 223, 188, 100 % );
+    background:                  #36363600;
+    bordercolor:                 rgba ( 219, 223, 188, 0 % );
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 0, 0, 208, 0 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
     selected-normal-background:  @foreground;
     border-color:                @foregound;
-    spacing:                     2;
+    spacing:                     0;
     separatorcolor:              @foreground;
     urgent-background:           rgba ( 0, 0, 208, 0 % );
     selected-urgent-background:  rgba ( 255, 129, 127, 100 % );
@@ -39,42 +43,40 @@ window {
     background-color: @background;
     border:           0;
     padding:          20;
-    width: 400px;
-    height: 500px;
-    border-radius: 20px;
+    margin: 12% 0px 0px 0px;
+    width: 600px;
+    border-radius: 0px;
+    location: north;
 }
 mainbox {
-    border:  0;
     border-color: @separatorcolor;
-    padding: 10;
 }
 message {
-    border:       2px 0px 0px ;
-    border-color: @separatorcolor;
+    border:       3px 0px 3px ;
     padding:      1px;
 }
 textbox {
     text-color: @foreground;
 }
 listview {
-    fixed-height: 0;
-    border:       2px 0px 0px ;
-    border-color: @separatorcolor;
-    spacing:      2px ;
+    fixed-height: false;
+    border-color: @foreground;
+    border: 4px 0px 4px;
     scrollbar:    false;
-    padding:      15px 5px 5px ;
+    border-radius:0px;
+    lines: 12;
 }
 element {
     border:  0;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 0px;
 }
 element-text {
-    background-color: inherit;
+    padding: 15px;
     text-color:       inherit;
+    /*horizontal-align: 0.5;*/
 }
 element.normal.normal {
-    background-color: @normal-background;
+    background-color: rgba (255, 255, 255, 10%);
     text-color:       @normal-foreground;
 }
 element.normal.urgent {
@@ -86,8 +88,10 @@ element.normal.active {
     text-color:       @active-foreground;
 }
 element.selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
+    text-color:       #ffffff;
+    border: 0px 0px 0px 5px;
+    background-color: rgba(96, 161, 230, 50%);
+    border-color: #60A1E6;
 }
 element.selected.urgent {
     background-color: @selected-urgent-background;
@@ -98,7 +102,7 @@ element.selected.active {
     text-color:       @selected-active-foreground;
 }
 element.alternate.normal {
-    background-color: @alternate-normal-background;
+    background-color: rgba (255, 255, 255, 10%);
     text-color:       @alternate-normal-foreground;
 }
 element.alternate.urgent {
@@ -121,12 +125,12 @@ mode-switcher {
 }
 button.selected {
     background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
+    border-color: #60A1E6;
 }
 inputbar {
     spacing:    0;
     text-color: @normal-foreground;
-    padding: 1px 1px 2px 1px;
+    padding: 1px 1px 0px 1px;
 }
 case-indicator {
     spacing:    0;
@@ -135,17 +139,21 @@ case-indicator {
 entry {
     spacing:    0;
     text-color: @normal-foreground;
+    padding: 10px 10px 4px;
+    horizontal-align: 0.5;
+    font: "Fantasque Sans Mono bold 20";
 }
 prompt, button{
     spacing:    0;
     text-color: @normal-foreground;
 }
 inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+    children:   [ entry,case-indicator ];
+    margin: 0px 0px 15px 0px;
 }
 textbox-prompt-colon {
     expand:     false;
-    str:        ":";
+    str:        "";
     margin:     0px 0.3em 0em 0em ;
     text-color: @normal-foreground;
 }

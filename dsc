@@ -7,17 +7,17 @@ while [ $# -gt 0 ]; do
       "activate")
           # Disable any current themes
           if [ "$(find . -name 'reverse')" != "" ]; then
-              bash $(find . -name "reverse")
+              # find . -name "reverse" | xargs "bash"
+
+	      # Reset ZSH Theme
+	      command -v theme
+	      [[ $? == 0 ]] && theme $(grep ZSH_THEME ~/.zshrc | grep -v "#" | sed "s/export //g" | sed "s/ZSH_THEME=//g" | sed "s/\"//g")
           fi
           theme=$2
           cd ./$theme/
           source ./info.sh
-
-          echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & bash ~/.fehbg; rm ./reverse' > ./reverse
+	  echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; mv $HOME/.icons/default/index.theme.inactivate $HOME/.icons/default/index.theme; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & sh ~/.fehbg; [[ $(head -n1 .zsh_theme | grep "For DSC theme") ]] && rm $HOME/.zsh_theme; [[ -f ./extra_reverse.sh ]] && sh extra_reverse.sh  rm ./reverse' > ./reverse
           chmod +x ./reverse 
-
-          # BSPWM
-          bash ./bspwm_theme.sh
 
           # GTK
           mv $HOME/.gtkrc-2.0 $HOME/.gtkrc-2.0.inactive
@@ -25,7 +25,19 @@ while [ $# -gt 0 ]; do
 
           mv $HOME/.config/gtk-3.0/settings.ini $HOME/.config/gtk-3.0/settings.ini.inactive
           cp ./gtk3-settings.ini $HOME/.config/gtk-3.0/settings.ini
+
+	  # Mouse Cursor
+	  cursor=$(grep "gtk-cursor-theme-name=" ./gtk2 | sed 's/gtk-cursor-theme-name=//g')
+	  sed "-i.inactive" "s/Inherits=.*/Inherits=$cursor/g" $HOME/.icons/default/index.theme
           timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null
+
+	  # ZSH
+	  [[ -f ./zsh_theme ]] && (echo -e "# For DSC theme $theme\n$(cat ./zsh_theme)" > $HOME/.zsh_theme & source ./zsh_theme && clear)
+
+          # BSPWM
+          bash ./bspwm_theme.sh
+
+
 
 
           # Alacritty
@@ -34,10 +46,10 @@ while [ $# -gt 0 ]; do
 	      exit
           fi
           cp $HOME/.config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml.inactive
-          echo -e "\nimport:\n  - ~/.config/alacritty/lib/$N.yml" >> $HOME/.config/alacritty/alacritty.yml 
+          echo -e "\nimport:\n  - ~/.config/alacritty/lib/$N.yml" > $HOME/.config/alacritty/alacritty.yml 
 
           # Polybar
-          killall polybar
+          pkill polybar
           polybar --config="./polybar.ini" > /dev/null 2> /dev/null &
 
           # Rofi
@@ -48,7 +60,9 @@ while [ $# -gt 0 ]; do
           # Wallpaper
           feh --no-fehbg --bg-scale ./bg.png
 
-          
+          # Extra
+	  [[ -f ./extra.sh ]] && source ./extra.sh
+
           ;;
       "deactivate")
           if [ "$(find . -name 'reverse')" != "" ]; then
@@ -58,7 +72,7 @@ while [ $# -gt 0 ]; do
       "status")
           if [ "$(find . -name 'reverse')" != "" ]; then
               echo "Status: Active"
-              source $(find . -name "reverse" | sed "s/reverse//")info.sh
+	      source $(dirname $(find . -name 'reverse'))/info.sh
               echo "Current: $title"
           else
               echo "Status: Inactive"

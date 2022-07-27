@@ -1,0 +1,13 @@
+icons=(婢 奄 奔 墳 )
+max=100
+if [[ $1 == 0 ]]; then
+                echo ${icons[0]}
+elif [[ $1 -le $((max/4)) ]]; then
+                echo ${icons[1]}
+elif [[ $1 -le $((max/2)) ]]; then
+                echo ${icons[2]}
+elif [[ $1 -le $(((max/2)+(max/4))) ]]; then
+		echo ${icons[3]}
+elif [[ $1 -le $max ]]; then
+                echo ${icons[4]}
+fi

@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir $HOME/.config/polybar/scripts/
+ln .polybar/* $HOME/.config/polybar/scripts/
