@@ -1,0 +1,55 @@
+* {
+    foreground:                  #dfbf8e;
+    background:                  #282828;
+    background-color: @background;
+    border-color:              @foreground;
+    spacing:                     2;
+    font: "terminus 18";
+}
+
+
+window {
+    width: 300px;
+}
+mainbox {
+    border:  2;
+    padding: 7;
+}
+listview {
+    dynamic: true;
+    lines: 6;
+    padding: 4 0 0;
+    spacing:      2px;
+    scrollbar:    false;
+}
+element {
+    padding: 10px 15px 10px;
+}
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element.normal, element.alternate {
+    background-color: @background;
+    text-color:       @foreground;
+}
+element.selected {
+    background-color: @foreground;
+    text-color:       @background;
+}
+inputbar {
+    border:       0px 0px 2px;
+    padding: 7 12 7;
+    text-color: @foreground;
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+prompt, entry {
+    spacing:    0;
+    text-color: @foreground;
+}
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @foreground;
+}

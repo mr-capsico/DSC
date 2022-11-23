@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cd $(dirname "$(readlink -f "$0")") # Move to the directory where the script is
 while [ $# -gt 0 ]; do
@@ -7,16 +7,16 @@ while [ $# -gt 0 ]; do
       "activate")
           # Disable any current themes
           if [ "$(find . -name 'reverse')" != "" ]; then
-              # find . -name "reverse" | xargs "bash"
+              # find . -name "reverse" | xargs "sh"
 
 	      # Reset ZSH Theme
 	      command -v theme
-	      [[ $? == 0 ]] && theme $(grep ZSH_THEME ~/.zshrc | grep -v "#" | sed "s/export //g" | sed "s/ZSH_THEME=//g" | sed "s/\"//g")
+	      [ $? == 0 ] && theme $(grep ZSH_THEME ~/.zshrc | grep -v "#" | sed "s/export //g" | sed "s/ZSH_THEME=//g" | sed "s/\"//g")
           fi
           theme=$2
           cd ./$theme/
           source ./info.sh
-	  echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; mv $HOME/.icons/default/index.theme.inactivate $HOME/.icons/default/index.theme; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & sh ~/.fehbg; [[ $(head -n1 .zsh_theme | grep "For DSC theme") ]] && rm $HOME/.zsh_theme; [[ -f ./extra_reverse.sh ]] && sh extra_reverse.sh  rm ./reverse' > ./reverse
+	  echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; mv $HOME/.icons/default/index.theme.inactivate $HOME/.icons/default/index.theme; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; pkill polybar; polybar &> /dev/null & sh ~/.fehbg; [ $(head -n1 .zsh_theme | grep "For DSC theme") ] && rm $HOME/.zsh_theme; [ -f ./extra_reverse.sh ] && sh extra_reverse.sh  rm ./reverse' > ./reverse
           chmod +x ./reverse 
 
           # GTK
@@ -32,10 +32,10 @@ while [ $# -gt 0 ]; do
           timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null
 
 	  # ZSH
-	  [[ -f ./zsh_theme ]] && (echo -e "# For DSC theme $theme\n$(cat ./zsh_theme)" > $HOME/.zsh_theme & source ./zsh_theme && clear)
+	  [ -f ./zsh_theme ] && (echo -e "# For DSC theme $theme\n$(cat ./zsh_theme)" > $HOME/.zsh_theme & source ./zsh_theme && clear)
 
           # BSPWM
-          bash ./bspwm_theme.sh
+          sh ./bspwm_theme.sh
 
 
 
@@ -61,12 +61,12 @@ while [ $# -gt 0 ]; do
           feh --no-fehbg --bg-scale ./bg.png
 
           # Extra
-	  [[ -f ./extra.sh ]] && source ./extra.sh
+	  [ -f ./extra.sh ] && source ./extra.sh
 
           ;;
       "deactivate")
           if [ "$(find . -name 'reverse')" != "" ]; then
-              bash $(find . -name "reverse")
+              sh $(find . -name "reverse")
           fi
           ;;
       "status")
