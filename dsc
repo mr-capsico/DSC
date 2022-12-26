@@ -16,7 +16,7 @@ while [ $# -gt 0 ]; do
           theme=$2
           cd ./$theme/
           source ./info.sh
-	  echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; mv $HOME/.icons/default/index.theme.inactivate $HOME/.icons/default/index.theme; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & sh ~/.fehbg; [[ $(head -n1 .zsh_theme | grep "For DSC theme") ]] && rm $HOME/.zsh_theme; [[ -f ./extra_reverse.sh ]] && sh extra_reverse.sh  rm ./reverse' > ./reverse
+	  echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; mv $HOME/.icons/default/index.theme.inactive $HOME/.icons/default/index.theme; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & sh ~/.fehbg; [[ $(head -n1 $HOME/.zsh_theme | grep "For DSC theme") ]] && rm $HOME/.zsh_theme; [[ -f ./extra_reverse.sh ]] && sh extra_reverse.sh; rm ./reverse' > ./reverse
           chmod +x ./reverse 
 
           # GTK
@@ -32,7 +32,7 @@ while [ $# -gt 0 ]; do
           timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null
 
 	  # ZSH
-	  [[ -f ./zsh_theme ]] && (echo -e "# For DSC theme $theme\n$(cat ./zsh_theme)" > $HOME/.zsh_theme & source ./zsh_theme && clear)
+	  echo -e "# For DSC theme $theme\n$(cat ./zsh_theme)" > $HOME/.zsh_theme & source $HOME/.zsh_theme && clear
 
           # BSPWM
           bash ./bspwm_theme.sh
@@ -54,7 +54,7 @@ while [ $# -gt 0 ]; do
 
           # Rofi
           cp $HOME/.config/rofi/config.rasi $HOME/.config/rofi/config.rasi.inactive
-          echo "@theme \"$HOME/.local/share/rofi/themes/$N.rasi\"" >>  $HOME/.config/rofi/config.rasi 
+          echo "@theme \"$HOME/.local/share/rofi/themes/$N.rasi\"" >  $HOME/.config/rofi/config.rasi 
 
 
           # Wallpaper
