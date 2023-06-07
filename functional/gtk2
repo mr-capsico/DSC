@@ -1,8 +1,8 @@
 gtk-theme-name="Gruvbox-Material-Dark"
 gtk-icon-theme-name="Gruvbox-Material-Dark"
 gtk-font-name="Fira Mono 14"
-gtk-cursor-theme-name="Bibata-Original-Classic"
-gtk-cursor-theme-size=32
+gtk-cursor-theme-name="Bibata-FNL"
+gtk-cursor-theme-size=16
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
 gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
 gtk-button-images=1

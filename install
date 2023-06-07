@@ -1,3 +1,12 @@
 #!/bin/bash
-mkdir $HOME/.config/polybar/scripts/
-ln .polybar/* $HOME/.config/polybar/scripts/
+
+N="fnl"
+cd $(dirname $0)
+
+# Alacritty
+! [ -d "$HOME/.config/alacritty/lib" ] && mkdir -p $HOME/.config/alacritty/lib
+cp ./alacritty.yml $HOME/.config/alacritty/lib/$N.yml
+
+# Rofi
+! [ -d "$HOME/.local/share/rofi/themes/" ] && mkdir -p $HOME/.local/share/rofi/themes/
+cp ./theme.rasi $HOME/.local/share/rofi/themes/$N.rasi

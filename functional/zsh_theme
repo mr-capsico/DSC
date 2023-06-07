@@ -1,4 +1,4 @@
 source $ZSH/themes/arrow.zsh-theme
 
-PROMPT='$(pwd | sed "s|$HOME|~|g") ➤  '
+PROMPT='$([[ "$PWD" == "$HOME" ]] || pwd | sed "s|$HOME|~|g") ➤  '
 RPROMPT='$(git_prompt_info)'
