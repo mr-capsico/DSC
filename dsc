@@ -20,7 +20,7 @@ while [ $# -gt 0 ]; do
           theme=$2
           cd ./$theme/
           source ./info.sh
-	  echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; mv $HOME/.icons/default/index.theme.inactive $HOME/.icons/default/index.theme; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; ffdir=$(dirname $(find $HOME/.mozilla/firefox/ -name prefs.js.inactive)); mv $ffdir/prefs.js.inactive $ffdir/prefs.js; killall polybar; polybar &> /dev/null & sh ~/.fehbg; [[ $(head -n1 $HOME/.zsh_theme | grep "For DSC theme") ]] && rm $HOME/.zsh_theme; [[ -f ./extra_reverse.sh ]] && sh extra_reverse.sh; rm ./reverse' > ./reverse
+	  echo 'cd $(dirname $0); mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; mv $HOME/.icons/default/index.theme.inactive $HOME/.icons/default/index.theme; timeout 0.4s xsettingsd -c ./xsettingsd.conf &> /dev/null; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.toml.inactive $HOME/.config/alacritty/alacritty.toml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; ffdir=$(dirname $(find $HOME/.mozilla/firefox/ -name prefs.js.inactive)); mv $ffdir/prefs.js.inactive $ffdir/prefs.js; killall polybar; polybar &> /dev/null & sh ~/.fehbg; [[ $(head -n1 $HOME/.zsh_theme | grep "For DSC theme") ]] && rm $HOME/.zsh_theme; rm $HOME/.emacs.d/lib/dsc-theme.el; [[ -f ./extra_reverse.sh ]] && sh extra_reverse.sh; rm ./reverse' > ./reverse
           chmod +x ./reverse 
 
           # GTK
@@ -52,12 +52,12 @@ while [ $# -gt 0 ]; do
 
 
           # Alacritty
-          if [ -e $HOME/.config/alacritty/alacritty.yml.inactive ]; then
+          if [ -e $HOME/.config/alacritty/alacritty.toml.inactive ]; then
 	      echo "$AR_MSG"
 	      exit
           fi
-          cp $HOME/.config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml.inactive
-          echo -e "\nimport:\n  - ~/.config/alacritty/lib/$N.yml" > $HOME/.config/alacritty/alacritty.yml 
+          cp $HOME/.config/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml.inactive
+	  echo -e "\nimport = [\"/home/desot/.config/alacritty/lib/$N.toml\"]" > $HOME/.config/alacritty/alacritty.toml
 
           # Polybar
           pkill polybar
@@ -65,7 +65,11 @@ while [ $# -gt 0 ]; do
 
           # Rofi
           cp $HOME/.config/rofi/config.rasi $HOME/.config/rofi/config.rasi.inactive
-          echo "@theme \"$HOME/.local/share/rofi/themes/$N.rasi\"" >  $HOME/.config/rofi/config.rasi 
+          if [[ -f "./config.rasi" ]]; then
+              cp ./config.rasi $HOME/.config/rofi/config.rasi
+          else
+              echo "@theme \"$HOME/.local/share/rofi/themes/$N.rasi\"" >  $HOME/.config/rofi/config.rasi 
+          fi
 
 	  # Firefox (Experimental)
 #	  profile=$(cat ~/.mozilla/firefox/profiles.ini | grep 'Default=' | head -n1 | sed 's/Default=//g') # For Firefox
@@ -88,6 +92,9 @@ while [ $# -gt 0 ]; do
 
           # Extra
 	  [[ -f ./extra.sh ]] && source ./extra.sh
+
+          # Extra
+	  [[ -f ./dsc-theme.el ]] && cp ./dsc-theme.el $HOME/.emacs.d/lib/dsc-theme.el
 
           ;;
       "deactivate")

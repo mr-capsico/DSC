@@ -8,7 +8,7 @@ if [ -f "./reverse" ]; then
     echo "Exitting; this theme appears to already be active. If that is not the case, then either execute (or delete) '$(pwd)/reverse' and try again."
     exit
 fi
-echo 'mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; timeout 0.4s xsettingsd -c ./xsettingsd.conf; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.yml.inactive $HOME/.config/alacritty/alacritty.yml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & bash ~/.fehbg; rm -- "$0"' > ./reverse
+echo 'mv $HOME/.gtkrc-2.0.inactive $HOME/.gtkrc-2.0; mv $HOME/.config/gtk-3.0/settings.ini.inactive $HOME/.config/gtk-3.0/settings.ini; timeout 0.4s xsettingsd -c ./xsettingsd.conf; bspc wm -r; bspc config normal_border_color $(bspc config normal_border_color); mv $HOME/.config/alacritty/alacritty.toml.inactive $HOME/.config/alacritty/alacritty.toml; mv $HOME/.config/rofi/config.rasi.inactive $HOME/.config/rofi/config.rasi; killall polybar; polybar &> /dev/null & bash ~/.fehbg; rm -- "$0"' > ./reverse
 chmod +x ./reverse 
 
 # BSPWM
@@ -24,12 +24,12 @@ timeout 0.4s xsettingsd -c ./xsettingsd.conf
 
 
 # Alacritty
-if [ -e $HOME/.config/alacritty/alacritty.yml.inactive ]; then
+if [ -e $HOME/.config/alacritty/alacritty.toml.inactive ]; then
 	echo "$AR_MSG"
 	exit
 fi
-cp $HOME/.config/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml.inactive
-echo -e "\nimport:\n  - ~/.config/alacritty/lib/$N.yml" >> $HOME/.config/alacritty/alacritty.yml 
+cp $HOME/.config/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml.inactive
+echo -e "\nimport:\n  - ~/.config/alacritty/lib/$N.toml" >> $HOME/.config/alacritty/alacritty.toml 
 
 # Polybar
 killall polybar

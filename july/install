@@ -5,7 +5,7 @@ cd $(dirname $0)
 
 # Alacritty
 ! [ -d "$HOME/.config/alacritty/lib" ] && mkdir -p $HOME/.config/alacritty/lib
-cp ./alacritty.yml $HOME/.config/alacritty/lib/$N.yml
+cp ./alacritty.toml $HOME/.config/alacritty/lib/$N.toml
 
 # Polybar
 ! [ -d "$HOME/.config/polybar/" ] && mkdir $HOME/.config/polybar/

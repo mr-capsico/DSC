@@ -1,0 +1,8 @@
+@theme "/home/desot/.local/share/rofi/themes/dwarf.rasi"
+configuration {
+  show-icons: true;
+  icon-theme: "MoreWaita";
+  run,drun {
+    fallback-icon: "application-x-executable";
+  }
+}

@@ -1,3 +1,5 @@
 source $ZSH/themes/jreese.zsh-theme
-[[ -f $HOME/.shell_colors ]] && (cat $HOME/.shell_colors)
+if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+	[[ -f $HOME/.shell_colors ]] && (cat $HOME/.shell_colors)
+fi
 sleep 1 && clear
